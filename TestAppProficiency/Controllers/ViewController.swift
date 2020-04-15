@@ -93,7 +93,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 extension UIImageView {
     typealias ImageCompletion = (_ image: UIImage) -> Void
     func setImage(url: String?, completion: @escaping ImageCompletion) {
-        image = .checkmark
+        image = UIImage(named: "placeholder")
         guard let url = url else { return }
         Request.fetchImage(url: url).execute(success: { [weak self] (response, data: Data) in
             guard let image = UIImage(data: data) else { return }
