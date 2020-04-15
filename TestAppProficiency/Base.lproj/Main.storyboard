@@ -14,40 +14,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRg-Bm-BW5">
-                                <rect key="frame" x="0.0" y="50" width="320" height="734"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tRg-Bm-BW5" secondAttribute="trailing" constant="50" id="5G9-sA-0sy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tRg-Bm-BW5" secondAttribute="bottom" constant="50" id="JiR-KP-po8"/>
-                            <constraint firstItem="tRg-Bm-BW5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="LMd-s9-dA9"/>
-                            <constraint firstItem="tRg-Bm-BW5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NLj-oY-PwD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tRg-Bm-BW5" secondAttribute="trailing" id="kq3-oK-htR"/>
-                            <constraint firstItem="tRg-Bm-BW5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nYI-C9-tIi"/>
-                            <constraint firstItem="tRg-Bm-BW5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="xjg-1z-9iZ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="kq3-oK-htR"/>
-                                <exclude reference="NLj-oY-PwD"/>
-                                <exclude reference="nYI-C9-tIi"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <exclude reference="5G9-sA-0sy"/>
-                                <include reference="kq3-oK-htR"/>
-                                <exclude reference="LMd-s9-dA9"/>
-                                <include reference="NLj-oY-PwD"/>
-                                <include reference="nYI-C9-tIi"/>
-                                <exclude reference="xjg-1z-9iZ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="jlk-2E-oOZ"/>
                 </viewController>

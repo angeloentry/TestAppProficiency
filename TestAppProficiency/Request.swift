@@ -1,5 +1,5 @@
 //
-//  Request.swift
+//  Request.swift/Users/user167484/Desktop/TestAppProficiencySwift/TestAppProficiency/data.json
 //  TestAppProficiency
 //
 //  Created by user167484 on 3/19/20.
@@ -8,35 +8,59 @@
 
 import Foundation
 
+//MARK: - Networking Utility
 enum Request {
     case fetchData
+    case fetchImage(url: String)
     
     typealias RequestCompletion<T> = (_ response: URLResponse?, _ data: T) -> Void
-    func execute<T: Decodable>(completion: @escaping RequestCompletion<T>) {
+    typealias FailureCompletion = (_ error: Error) -> Void
+    
+    var url: URL? {
         switch self {
         case .fetchData:
-//            let url = URL(string: "http://localhost:8080")!
-            let url = Bundle.main.url(forResource: "data", withExtension: "json")
-            
-            let session = URLSession(configuration: .default)
-            var request = URLRequest(url: url!)
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            session.dataTask(with: request) { (data, response, error) in
-                print("Error is -> ", error)
-                if let json = data {
-                    do {                        let decoder = JSONDecoder()
-                        let newData = try decoder.decode(T.self, from: json)
+            return URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
+        case .fetchImage(let urlString):
+            return URL(string: urlString)
+        }
+    }
+    
+    
+    func execute<T: Decodable>(success: @escaping RequestCompletion<T>, failure: @escaping FailureCompletion) {
+        guard let url = url else { print("URL Issue"); return }
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    failure(error)
+                }
+            } else {
+                guard let data = data else { return }
+                guard let string = String(data: data, encoding: String.Encoding.isoLatin1) else { return }
+                guard let properData = string.data(using: .utf8, allowLossyConversion: true) else { return }
+       
+                switch self {
+                case .fetchData:
+                    do {
+                        let decoder = JSONDecoder()
+                        let newData = try decoder.decode(T.self, from: properData)
                         DispatchQueue.main.async {
-                            completion(response, newData)
+                            success(response, newData)
                         }
-                        
                     } catch let error {
                         print("Caught Error - > \(error)")
+                        DispatchQueue.main.async {
+                            failure(error)
+                        }
+                        
+                    }
+                case .fetchImage:
+                    DispatchQueue.main.async {
+                        success(response, data as! T)
                     }
                 }
-            }.resume()
-        }
-        
-        
+            }
+        }.resume()
     }
 }
+

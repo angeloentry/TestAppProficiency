@@ -11,7 +11,7 @@ import Foundation
 
 struct DataModel: Codable {
     var title: String? = ""
-    var data: [Data]? = []
+    var data: [Model]? = []
     
     enum CodingKeys: String, CodingKey {
         case title = "title"
@@ -21,11 +21,11 @@ struct DataModel: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         title = try values.decodeIfPresent(String.self, forKey: .title)
-        data = try values.decodeIfPresent([Data].self, forKey: .data)
+        data = try values.decodeIfPresent([Model].self, forKey: .data)
         
     }
 }
-struct Data: Codable {
+struct Model: Codable {
     var title: String? = ""
     var desc: String? = ""
     var image: String? = ""
