@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     //MARK: - Properties
     lazy var tableview: TableView = TableView(sender: self)
     
-    var tableData: [Model] = []
+    var cellModels: [RowViewModel] = []
     private var imageCache = NSCache<NSString, UIImage>()
     
     //MARK: - Default Methods
@@ -37,7 +37,11 @@ class ViewController: UIViewController {
         Request.fetchData.execute(success: { [weak self] (response, data: DataModel) in
             self?.tableview.refreshControl?.endRefreshing()
             self?.navigationItem.title = data.title ?? ""
-            self?.tableData = data.data ?? []
+            let models = data.data ?? []
+            models.forEach { [weak self] model in
+                let cellModel = ImageCellViewModel(model: model, cache: self?.imageCache)
+                self?.cellModels.append(cellModel)
+            }
             self?.tableview.reloadData()
         }, failure: { [weak self] (error) in
             self?.tableview.refreshControl?.endRefreshing()
@@ -49,7 +53,7 @@ class ViewController: UIViewController {
 //MARK: - Tableview Delegates and DataSources
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = ImageCellViewModel(model: tableData[indexPath.row], cache: imageCache)
+        let cellModel = cellModels[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.identifier)
         if let cellConfiguration = cell as? CellConfiguration  {
             cellConfiguration.setup(viewModel: cellModel)
@@ -58,7 +62,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+        return cellModels.count
     }
 }
 

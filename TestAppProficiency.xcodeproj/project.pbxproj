@@ -98,16 +98,15 @@
 		600C20CE2420EE5F00EA3C6C /* TestAppProficiency */ = {
 			isa = PBXGroup;
 			children = (
+				6025C42B2451C5C100E96EE6 /* Helpers */,
 				6025C42A2451BF9B00E96EE6 /* CustomViews */,
 				60E4D08E2447722900B86E73 /* Controllers */,
-				60E4D08D2447721B00B86E73 /* Networking */,
 				60E4D08C2447720200B86E73 /* TableCells */,
 				60E4D08B244771F100B86E73 /* Models */,
 				600C20CF2420EE5F00EA3C6C /* AppDelegate.swift */,
 				600C20DB2420EE6200EA3C6C /* Assets.xcassets */,
 				600C20DD2420EE6200EA3C6C /* LaunchScreen.storyboard */,
 				600C20E02420EE6200EA3C6C /* Info.plist */,
-				6084D2962450C7E3007CE820 /* Image+Utilities.swift */,
 			);
 			path = TestAppProficiency;
 			sourceTree = "<group>";
@@ -129,6 +128,15 @@
 				6025C4282451798D00E96EE6 /* CellImageView.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		6025C42B2451C5C100E96EE6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6013EC42244F61F40081265A /* ConstraintManager.swift */,
+				6084D2962450C7E3007CE820 /* Image+Utilities.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		60E4D08B244771F100B86E73 /* Models */ = {
@@ -162,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				600C20D32420EE5F00EA3C6C /* ViewController.swift */,
-				6013EC42244F61F40081265A /* ConstraintManager.swift */,
+				60E4D08D2447721B00B86E73 /* Networking */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

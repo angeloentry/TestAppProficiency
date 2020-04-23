@@ -22,7 +22,7 @@ class ImageCellViewModel: RowViewModel {
         }
     }
     
-    init(model: Model, cache: NSCache<NSString, UIImage>) {
+    init(model: Model, cache: NSCache<NSString, UIImage>? = nil) {
         defer {
             self.model = model
         }

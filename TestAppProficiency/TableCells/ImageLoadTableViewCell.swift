@@ -10,6 +10,7 @@ import UIKit
 
 //MARK: - Cell Protocols
 protocol RowViewModel {
+    var identifier: String { get set }
 }
 
 protocol CellConfiguration {
