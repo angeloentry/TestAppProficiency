@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootController = navigationController
         window?.rootViewController = rootController
         window?.makeKeyAndVisible()
+        
+        var apple = 10
+        var mango = 20
+        let bool = apple < mango
         return true
     }
 

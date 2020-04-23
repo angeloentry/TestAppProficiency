@@ -25,9 +25,12 @@ enum Request {
         }
     }
     
+    enum ImageError: Error {
+        case wrongURL
+    }
     
     func execute<T: Decodable>(success: @escaping RequestCompletion<T>, failure: @escaping FailureCompletion) {
-        guard let url = url else { print("URL Issue"); return }
+        guard let url = url else { failure(ImageError.wrongURL); return }
         let session = URLSession(configuration: .default)
         session.dataTask(with: url) { (data, response, error) in
             if let error = error {

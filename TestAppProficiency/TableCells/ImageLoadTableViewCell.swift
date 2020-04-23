@@ -8,31 +8,28 @@
 
 import UIKit
 
+//MARK: - Cell Protocols
+protocol RowViewModel {
+}
+
+protocol CellConfiguration {
+    func setup(viewModel: RowViewModel)
+}
+
 class ImageLoadTableViewCell: UITableViewCell {
     //MARK: - Properties
-    var titleLabel = UILabel()
-    var descLabel = UILabel()
-    var imageContent = UIImageView()
+    lazy var titleLabel = CellLabel(sender: self)
+    lazy var descLabel = CellLabel(sender: self)
+    lazy var imageContent = CellImageView(sender: self)
 
+    
     //MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        imageContent.contentMode = .scaleAspectFit
-        imageContent.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        descLabel.numberOfLines = 0
         descLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
         descLabel.lineBreakMode = .byWordWrapping
-        
-        contentView.addSubview(imageContent)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descLabel)
-//        
-        setup()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -45,24 +42,41 @@ class ImageLoadTableViewCell: UITableViewCell {
 
     
     //MARK: - Constraints
-    func setup() {
-        let a = NSLayoutConstraint(item: imageContent, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leadingMargin, multiplier: 1, constant: 0)
-        let b = NSLayoutConstraint(item: imageContent, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .topMargin, multiplier: 1, constant: 20)
+    func setupConstraints() {
+        Constraints.shared.setConstraints(fromView: imageContent, toView: contentView,
+                                          attributes: [(.leading, .leadingMargin, .equal, 0),
+                                                       (.top, .topMargin, .equal, 20),
+                                                       (.bottom, .bottomMargin, .lessThanOrEqual, -20)])
+        Constraints.shared.setConstraints(fromView: titleLabel, toView: imageContent,
+                                          attributes: [(.leading, .trailing, .equal, 20),
+                                                       (.top, .top, .equal, 0)])
+        Constraints.shared.setConstraints(fromView: titleLabel, toView: contentView,
+                                          attributes: [(.trailing, .trailingMargin, .equal, -20)])
+        Constraints.shared.setConstraints(fromView: descLabel, toView: titleLabel,
+                                          attributes: [(.top, .bottom, .equal, 0),
+                                                       (.leading, .leading, .equal, 0),
+                                                       (.trailing, .trailing, .equal, 0)])
+        Constraints.shared.setConstraints(fromView: descLabel, toView: contentView,
+                                          attributes: [(.bottom, .bottomMargin, .lessThanOrEqual, -20)])
+        Constraints.shared.setConstraints(fromView: imageContent,
+                                          attributes: [(.height, .notAnAttribute, .equal, 50),
+                                                       (.width, .notAnAttribute, .equal, 50)])
         
-        let d = NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: imageContent, attribute: .trailing, multiplier: 1, constant: 20)
-        let f = NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: imageContent, attribute: .top, multiplier: 1, constant: 0)
-        let g = NSLayoutConstraint(item: titleLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: -20)
-
-        let e = NSLayoutConstraint(item: descLabel, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 0)
-        let h = NSLayoutConstraint(item: descLabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .leading, multiplier: 1, constant: 0)
-        let i = NSLayoutConstraint(item: descLabel, attribute: .trailing, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1, constant: 0)
-        let j = NSLayoutConstraint(item: descLabel, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: contentView, attribute: .bottomMargin, multiplier: 1, constant: -20)
-        
-        let k = NSLayoutConstraint(item: imageContent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50)
-        let l = NSLayoutConstraint(item: imageContent, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50)
-        
-        let m = NSLayoutConstraint(item: imageContent, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: contentView, attribute: .bottomMargin, multiplier: 1.0, constant: -20)
-        NSLayoutConstraint.activate([a,b,d,e,f,g,h,i,j,k,l,m])
     }
-
 }
+
+extension ImageLoadTableViewCell: CellConfiguration {
+    func setup(viewModel: RowViewModel) {
+        guard let viewModel = viewModel as? ImageCellViewModel else { return }
+        imageContent.image = viewModel.image
+        titleLabel.text = viewModel.title
+        descLabel.text = viewModel.description
+        viewModel.didLoadImage = { isImageLoaded in
+            if isImageLoaded {
+                self.imageContent.image = viewModel.image
+            }
+        }
+    }
+}
+
+

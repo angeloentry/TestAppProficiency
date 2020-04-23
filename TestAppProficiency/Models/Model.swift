@@ -1,28 +1,29 @@
 //
-//  DataModel.swift
+//  Model.swift
 //  TestAppProficiency
 //
-//  Created by user167484 on 3/19/20.
+//  Created by user167484 on 4/21/20.
 //  Copyright © 2020 Allen Savio. All rights reserved.
 //
 
 import Foundation
 
-
-struct DataModel: Codable {
+struct Model: Codable {
     var title: String? = ""
-    var data: [Model]? = []
+    var desc: String? = ""
+    var image: String? = ""
     
     enum CodingKeys: String, CodingKey {
         case title = "title"
-        case data = "rows"
+        case desc = "description"
+        case image = "imageHref"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         title = try values.decodeIfPresent(String.self, forKey: .title)
-        data = try values.decodeIfPresent([Model].self, forKey: .data)
-        
+        desc = try values.decodeIfPresent(String.self, forKey: .desc)
+        image = try values.decodeIfPresent(String.self, forKey: .image)
     }
 }
 
