@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		600C20D02420EE5F00EA3C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C20CF2420EE5F00EA3C6C /* AppDelegate.swift */; };
-		600C20D42420EE5F00EA3C6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C20D32420EE5F00EA3C6C /* ViewController.swift */; };
+		600C20D42420EE5F00EA3C6C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C20D32420EE5F00EA3C6C /* InfoViewController.swift */; };
 		600C20DC2420EE6200EA3C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 600C20DB2420EE6200EA3C6C /* Assets.xcassets */; };
 		600C20DF2420EE6200EA3C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 600C20DD2420EE6200EA3C6C /* LaunchScreen.storyboard */; };
 		600C20EA2420EE6200EA3C6C /* TestAppProficiencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C20E92420EE6200EA3C6C /* TestAppProficiencyTests.swift */; };
@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		600C20CC2420EE5F00EA3C6C /* TestAppProficiency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppProficiency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600C20CF2420EE5F00EA3C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		600C20D32420EE5F00EA3C6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		600C20D32420EE5F00EA3C6C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		600C20DB2420EE6200EA3C6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		600C20DE2420EE6200EA3C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		600C20E02420EE6200EA3C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		60E4D08E2447722900B86E73 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				600C20D32420EE5F00EA3C6C /* ViewController.swift */,
+				600C20D32420EE5F00EA3C6C /* InfoViewController.swift */,
 				60E4D08D2447721B00B86E73 /* Networking */,
 			);
 			path = Controllers;
@@ -293,7 +293,7 @@
 				6025C4272451795300E96EE6 /* CellLabel.swift in Sources */,
 				6013EC41244F56C20081265A /* ImageCellViewModel.swift in Sources */,
 				60A1A008244F2E8F0002E666 /* Model.swift in Sources */,
-				600C20D42420EE5F00EA3C6C /* ViewController.swift in Sources */,
+				600C20D42420EE5F00EA3C6C /* InfoViewController.swift in Sources */,
 				600C20D02420EE5F00EA3C6C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

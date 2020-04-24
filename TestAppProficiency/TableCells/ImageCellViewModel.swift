@@ -10,31 +10,32 @@ import Foundation
 import UIKit
 
 class ImageCellViewModel: RowViewModel {
+    //MARK: - Properties
     var identifier = "imageDetailCell"
     var imageCache: NSCache<NSString, UIImage>?
     var didLoadImage: ((Bool) -> Void)?
     
     var title = ""
     var description = ""
+    var imageURL: String? {
+        didSet {
+            getImage(from: imageURL ?? "")
+        }
+    }
     var image: UIImage? {
         didSet {
             didLoadImage?(true)
         }
     }
     
+    //MARK: - Initialisers
     init(model: Model, cache: NSCache<NSString, UIImage>? = nil) {
         defer {
-            self.model = model
+            imageURL = model.image ?? ""
         }
+        title = model.title ?? ""
+        description = model.desc ?? ""
         self.imageCache = cache
-    }
-    
-    var model: Model? {
-        didSet {
-            title = model?.title ?? ""
-            description = model?.desc ?? ""
-            getImage(from: model?.image ?? "")
-        }
     }
     
     func getImage(from urlString: String) {
@@ -42,7 +43,7 @@ class ImageCellViewModel: RowViewModel {
             self.image = image
         } else {
             UIImage.from(url: urlString) { [weak self] (image) in
-                self?.imageCache?.setObject(image, forKey: NSString(string: self?.model?.image ?? ""))
+                self?.imageCache?.setObject(image, forKey: NSString(string: urlString))
                 self?.image = image
             }
         }

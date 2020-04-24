@@ -30,7 +30,7 @@ class TableView: UITableView {
     
     func setConstraints(to view: UIView) {
         view.addSubview(self)
-        Constraints.shared.setConstraints(fromView: self, toView: view,
+        Constraints.setConstraints(fromView: self, toView: view,
                                           attributes: [(.leading, .leadingMargin, .equal, 0),
                                                        (.trailing, .trailingMargin, .equal, 0),
                                                        (.top, .topMargin, .equal, 0),

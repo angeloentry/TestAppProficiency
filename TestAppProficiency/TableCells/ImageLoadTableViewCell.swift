@@ -44,30 +44,33 @@ class ImageLoadTableViewCell: UITableViewCell {
     
     //MARK: - Constraints
     func setupConstraints() {
-        Constraints.shared.setConstraints(fromView: imageContent, toView: contentView,
+        Constraints.setConstraints(fromView: imageContent, toView: contentView,
                                           attributes: [(.leading, .leadingMargin, .equal, 0),
                                                        (.top, .topMargin, .equal, 20),
                                                        (.bottom, .bottomMargin, .lessThanOrEqual, -20)])
-        Constraints.shared.setConstraints(fromView: titleLabel, toView: imageContent,
+        Constraints.setConstraints(fromView: titleLabel, toView: imageContent,
                                           attributes: [(.leading, .trailing, .equal, 20),
                                                        (.top, .top, .equal, 0)])
-        Constraints.shared.setConstraints(fromView: titleLabel, toView: contentView,
+        Constraints.setConstraints(fromView: titleLabel, toView: contentView,
                                           attributes: [(.trailing, .trailingMargin, .equal, -20)])
-        Constraints.shared.setConstraints(fromView: descLabel, toView: titleLabel,
+        Constraints.setConstraints(fromView: descLabel, toView: titleLabel,
                                           attributes: [(.top, .bottom, .equal, 0),
                                                        (.leading, .leading, .equal, 0),
                                                        (.trailing, .trailing, .equal, 0)])
-        Constraints.shared.setConstraints(fromView: descLabel, toView: contentView,
+        Constraints.setConstraints(fromView: descLabel, toView: contentView,
                                           attributes: [(.bottom, .bottomMargin, .lessThanOrEqual, -20)])
-        Constraints.shared.setConstraints(fromView: imageContent,
+        Constraints.setConstraints(fromView: imageContent,
                                           attributes: [(.height, .notAnAttribute, .equal, 50),
                                                        (.width, .notAnAttribute, .equal, 50)])
         
     }
+    
 }
 
 extension ImageLoadTableViewCell: CellConfiguration {
+    
     func setup(viewModel: RowViewModel) {
+        self.imageContent.image = nil
         guard let viewModel = viewModel as? ImageCellViewModel else { return }
         imageContent.image = viewModel.image
         titleLabel.text = viewModel.title

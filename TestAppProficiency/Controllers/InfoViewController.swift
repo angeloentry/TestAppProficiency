@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  InfoViewController.swift
 //  TestAppProficiency
 //
 //  Created by user167484 on 3/17/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class InfoViewController: UIViewController {
     //MARK: - Properties
     lazy var tableview: TableView = TableView(sender: self)
     
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: - Tableview Delegates and DataSources
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellModel = cellModels[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.identifier)
@@ -67,7 +67,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - Alert
-extension ViewController {
+extension UIViewController {
     func showAlert(error: Error) {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
