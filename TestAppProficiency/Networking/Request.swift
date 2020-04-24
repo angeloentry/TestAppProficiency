@@ -12,6 +12,7 @@ import Foundation
 enum Request {
     case fetchData
     case fetchImage(url: String)
+    case mockData
     
     typealias RequestCompletion<T> = (_ response: URLResponse?, _ data: T) -> Void
     typealias FailureCompletion = (_ error: Error) -> Void
@@ -22,6 +23,9 @@ enum Request {
             return URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")
         case .fetchImage(let urlString):
             return URL(string: urlString)
+            
+        case .mockData:
+            return Bundle.main.url(forResource: "data", withExtension: "json")
         }
     }
     
@@ -43,7 +47,7 @@ enum Request {
                 guard let properData = string.data(using: .utf8, allowLossyConversion: true) else { return }
        
                 switch self {
-                case .fetchData:
+                case .fetchData, .mockData:
                     do {
                         let decoder = JSONDecoder()
                         let newData = try decoder.decode(T.self, from: properData)

@@ -98,6 +98,7 @@
 		600C20CE2420EE5F00EA3C6C /* TestAppProficiency */ = {
 			isa = PBXGroup;
 			children = (
+				60E4D08D2447721B00B86E73 /* Networking */,
 				6025C42B2451C5C100E96EE6 /* Helpers */,
 				6025C42A2451BF9B00E96EE6 /* CustomViews */,
 				60E4D08E2447722900B86E73 /* Controllers */,
@@ -170,7 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				600C20D32420EE5F00EA3C6C /* InfoViewController.swift */,
-				60E4D08D2447721B00B86E73 /* Networking */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
