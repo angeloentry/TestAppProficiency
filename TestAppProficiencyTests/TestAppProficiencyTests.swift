@@ -33,6 +33,11 @@ class TestAppProficiencyTests: XCTestCase {
         }
     }
     
+    func testDelegateAndDataSources() {
+        XCTAssert(controller?.tableview.delegate != nil)
+        XCTAssert(controller?.tableview.dataSource != nil)
+    }
+    
     func testAlert() {
         enum CustomError: Error {
             case random
